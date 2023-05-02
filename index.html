@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akash Bag - Portfolio Website</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -168,10 +168,10 @@
                 </div>
                 <div class="contact-right">
                     <form action="">
-                        <input type="text" name="Name" placeholder="Your Name" required>
-                        <input type="email" name="email" placeholder="Your Email" required>
-                        <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
-                        <button type="submit" class="btn btn-2">Submit</button>
+                        <input type="text" id="name" name="Name" placeholder="Your Name" required>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <textarea name="Message" id="message" rows="6" placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn btn-2" onclick="submitForm()">Submit</button>
                     </form>
                 </div>
             </div>
@@ -181,6 +181,46 @@
         </div>
     </div>
     
+    <script>
+        var tablinks = document.getElementsByClassName("tab-links");
+var tabcontents = document.getElementsByClassName("tab-contents");
+
+        function opentab(tabname){
+    for(tablink of tablinks){
+        tablink.classList.remove("active-link");
+    }
+    for(tabcontent of tabcontents){
+        tabcontent.classList.remove("active-tab");
+    }
+    event.currentTarget.classList.add('active-link');
+    document.getElementById(tabname).classList.add('active-tab')
+}
+
+var sidemenu = document.getElementById('sidemenu');
+
+function openmenu(){
+    sidemenu.style.right = "0";
+}
+function closemenu(){
+    sidemenu.style.right = "-200px";
+}
+    </script>
+    <script>
+        function submitForm() {
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const message = document.getElementById('message').value;
+          
+          const data = { name, email, message };
+          fetch('/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          });
+        }
+      </script>
     <script src="app.js"></script>
 </body>
 </html>
